@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 import Accordion from "./components/Accordion/Accordion";
 import DropDown from "./components/DropDown/DropDown";
+import Header from "./components/Header/Header";
+import Route from "./components/Route";
 import Search from "./components/Search/Search";
 import Translate from "./components/Transalate/Transalate";
 
@@ -27,17 +29,27 @@ const options = [
 ];
 function App() {
   const [selected, setSelected] = useState(options[0]);
+
   return (
     <div>
-      {/* <Accordion items={items} /> */}
-      {/* <Search /> */}
-      {/* <DropDown
-        selected={selected}
-        onSelectedChange={setSelected}
-        options={options}
-        dropDownLabel={"Select the Colour"}
-      /> */}
-      <Translate />
+      <Header />
+      <Route path="/list">
+        <Search />
+      </Route>
+      <Route path="/dropdown">
+        <DropDown
+          selected={selected}
+          onSelectedChange={setSelected}
+          options={options}
+          dropDownLabel={"Select the Colour"}
+        />
+      </Route>
+      <Route path="/translate">
+        <Translate />
+      </Route>
+      <Route path="/">
+        <Accordion items={items} />
+      </Route>
     </div>
   );
 }
